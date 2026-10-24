@@ -22,6 +22,64 @@ Ngày kiểm tra production: **23/10/2026 · Chỉ đọc**. Bổ sung 24/10: đ
 
 **Ba điều phải hiểu đúng:** Nộp đơn chưa đồng nghĩa có phòng. Giá dự kiến chưa đồng nghĩa khoản đang phải trả. Một sinh viên có thể có nhiều lần đặt phòng, nên tiền và giấy tờ phải gắn đúng lần ở.
 
+### Phạm vi thiết kế — cần thiết kế những gì
+
+Đây là phạm vi đề xuất từ kết quả audit đã có, không phải rà lại Figma hoặc xác nhận tính năng production. Dùng danh sách màn, trạng thái và luồng nối bên dưới để xác định khối lượng design, prototype và video. Một trạng thái có thể là biến thể của màn, không cần thành trang riêng.
+
+**Ưu tiên:** **Làm trước** = bắt buộc cho hành trình chính. **Làm sau** = giai đoạn tiếp theo, vẫn giữ chức năng hiện có khi revamp. **Cần xác nhận** = chốt quy tắc hoặc nhu cầu trước khi cam kết thiết kế. Có thể bắt đầu phần làm trước với giả định được ghi rõ.
+
+#### 1. Màn hình theo ứng dụng và trạng thái cần có
+
+| Ứng dụng | Nhóm màn | Trạng thái quan trọng | Ưu tiên |
+|---|---|---|---|
+| Application | Hướng dẫn trước đăng ký | Đủ điều kiện; hướng dẫn khi không đủ điều kiện | Làm trước |
+| Application | Các bước nhập và xem lại | Trống; đã nhập; lỗi; sửa; tải/gián đoạn | Làm trước |
+| Application | Phí và kết quả gửi | Đang xử lý; thành công; lỗi; phí đã trả nhưng đơn chưa rõ kết quả và cách khôi phục | Làm trước |
+| Application | Theo dõi hồ sơ | Đã gửi; xét duyệt; bổ sung; chấp thuận; chờ chỗ; từ chối; hết hạn giữ chỗ | Làm trước |
+| Application | Lưu và tiếp tục | Đã lưu; tiếp tục; bản nháp hết hạn/không truy cập được | Cần xác nhận |
+| Admin | Hàng đợi và xét đơn | Trống; chờ xử lý; thiếu thông tin; quyết định; waitlist; chuyển đổi thành công/lỗi | Làm trước |
+| Admin | Reservation và dữ liệu liên quan | Pending Approval; Confirmed; hủy; hiện tại/sắp tới/đã qua; thiếu liên kết | Làm trước |
+| Admin | Availability và xếp phòng | Còn/hết chỗ; xung đột ngày/bed; chờ; xác nhận; lỗi | Làm trước |
+| Admin | Giá và xem trước giá | Cơ sở giá hỗ trợ; kỳ đủ/không trọn; ngày sai; quy tắc trùng; chưa lấy được giá | Làm trước; xác nhận cách tính |
+| Admin | Hóa đơn và duyệt/phát hành | Trống; nháp; đã phát hành; trả một phần; đã trả; quá hạn còn dư nợ; void; lỗi | Làm trước; xác nhận quyền và hiển thị |
+| Admin | Thanh toán và đối soát | Chưa trả; chờ; thành công; lỗi; chưa khớp/phân bổ một phần; hoàn tiền nếu hỗ trợ | Làm trước; xác nhận chính sách hoàn |
+| Admin | Giấy tờ và hàng đợi yêu cầu | Thiếu/đã gửi/đã kiểm tra; yêu cầu chờ/duyệt/từ chối; lỗi | Làm trước: giấy tờ admissions và guest hiện có; dịch vụ khác làm sau |
+| Portal | Đăng nhập và khôi phục | Đăng nhập; link sai/hết hạn; đã gửi khôi phục; không có quyền | Làm trước |
+| Portal | Home công việc và checklist | Trống; đang xét; cần làm; chấp thuận; hold sắp hết/đã hết; tải/lỗi | Làm trước |
+| Portal | Danh sách và chi tiết reservation | Trống; chờ duyệt; xác nhận; hiện tại/sắp tới/đã qua; hủy | Làm trước |
+| Portal | Quyền đặt, chọn kỳ/loại phòng, xem giá, kết quả | Đủ/không đủ điều kiện; chọn; hết chỗ; xem giá; chờ duyệt; xác nhận khi được phép; hết hạn chọn; lỗi | Bao phủ luồng chính; xác nhận ISH cho tự chọn hay Admin xếp |
+| Portal | Lịch thu, hóa đơn và xem lại thanh toán | Chưa có khoản phải trả; dự kiến/đã phát hành; đến/quá hạn; trả một phần; đã trả | Làm trước |
+| Portal | Checkout, kết quả và biên nhận/lịch sử | Đang xử lý; cần thao tác; thành công; lỗi/hủy; chưa rõ kết quả và cách khôi phục | Làm trước |
+| Portal | Giấy tờ, Handbook/help, guest và lịch sử | Trống; có/link hỏng; lỗi upload nếu hỗ trợ; guest chờ/duyệt/từ chối | Làm trước: giữ thông tin và dịch vụ cần thiết |
+| Portal | Maintenance | Trống; đã gửi; đang xử lý; hoàn tất; lỗi | Làm sau; xác nhận phạm vi ISH |
+| Portal | Gia hạn, đổi phòng, chấm dứt | Đủ/không đủ quyền; gửi; chờ; duyệt/từ chối; hết hạn | Làm sau; xác nhận chính sách; tách đặt lần đầu |
+| Portal | Profile/preferences | Xem/sửa; lỗi nhập; đã lưu; lưu lỗi | Làm sau; giữ phần thiết yếu hiện có |
+| Portal | Scholarship, Community, map | Trống; nội dung/kết quả; tải/lỗi | Cần xác nhận nhu cầu; không chặn demo chính |
+
+#### 2. Luồng nối màn và bàn giao giữa ứng dụng
+
+| Luồng | Thứ tự màn và bàn giao | Ưu tiên |
+|---|---|---|
+| Đăng ký và nhận quyết định | Form: hướng dẫn → nhập → xem lại → phí/kết quả → Admin: hàng đợi → xét đơn → sinh viên: theo dõi/quyết định; chỉ dùng Portal khi đã có quyền | Làm trước |
+| Hoàn tất điều kiện | Sinh viên: chấp thuận/hold/checklist → giấy tờ/thỏa thuận → Admin: kiểm tra → sinh viên: checklist cập nhật hoặc yêu cầu bổ sung; điểm vào tùy mốc cấp quyền | Làm trước |
+| Admin xếp phòng | Admin: đơn → chuyển đổi/reservation theo quyền → availability/xếp → xem giá → chờ/xác nhận → Portal: chi tiết và việc tiếp theo | Làm trước; xác nhận thứ tự/quyền |
+| Sinh viên tự chọn sau duyệt | Portal: quyền đặt → kỳ/loại phòng → xem giá → gửi/kết quả → Admin: xét/xếp nếu cần → Portal: chờ/xác nhận | Cần xác nhận ISH bật nhánh này; nếu không dùng nhánh Admin xếp |
+| Phát hành và trả hóa đơn | Admin: reservation/giá → nháp → kiểm tra/phát hành → Portal: hóa đơn → xem lại → checkout → kết quả/biên nhận → Admin: thanh toán/đối soát | Làm trước |
+| Khôi phục thanh toán gián đoạn | Form/Portal: kết quả chưa rõ/lỗi → trạng thái/mã thanh toán → khôi phục an toàn → đơn/hóa đơn cập nhật; Admin đối soát khi cần | Làm trước; thử lại không mặc định thu lần nữa |
+| Guest và thông tin lưu trú | Portal: tài liệu/help hoặc guest → đã gửi/lịch sử → Admin: xét yêu cầu → Portal: trạng thái/hướng dẫn | Làm trước |
+| Dịch vụ khác | Portal: maintenance/gia hạn/đổi/chấm dứt → Admin: xem/xét → Portal: kết quả | Làm sau khi chốt chính sách và phạm vi |
+
+Đây là luồng mục tiêu, chưa phải chuyển trạng thái đã kiểm tra production. Đơn, đặt chỗ, giấy tờ và tiền có trạng thái riêng. Prototype/video dùng cùng một sinh viên và lần ở giả, luôn cho biết ai làm tiếp. Demo chính: đăng ký → xét → điều kiện → nhánh chỗ ở đã thống nhất → hóa đơn → thanh toán/biên nhận. Hiện bước chờ duyệt trước xác nhận nếu chính sách yêu cầu.
+
+#### 3. Các quyết định ảnh hưởng phạm vi
+
+- **Quyền truy cập:** khi nào gửi tài khoản Portal; trước đó hoàn tất điều kiện ở đâu?
+- **Chỗ ở:** Admin xếp hay sinh viên chọn; loại phòng hay room/bed; ai duyệt; Booked và Confirmed nghĩa gì?
+- **Tiền:** cơ sở giá, kỳ không trọn, deposit, quyền duyệt/hiển thị, phương thức trả và hoàn tiền.
+- **Dịch vụ:** upload, maintenance, gia hạn/đổi/chấm dứt, scholarship và community nào cần ngay?
+
+**Đủ phạm vi thiết kế khi** mỗi dòng Làm trước có màn và trạng thái quan trọng; mỗi luồng Làm trước có bàn giao/kết quả; nhánh chỗ ở đã chốt hoặc ghi rõ giả định. Làm sau/Cần xác nhận chưa phải cam kết cho đợt đầu. Phần này xác định cần thiết kế gì, không hướng dẫn layout hoặc từng nút bấm.
+
 ### Bổ sung ngày 24/10 — cần tách hai cách đặt phòng
 
 **Làm rõ từ trao đổi với người phụ trách:** application được admin từ chối hoặc chuyển thành reservation. Có một use case riêng: sau khi được duyệt, sinh viên có thể tự chọn phòng trong Portal; đây không phải Request Room Change. Chưa xác nhận use case này đang bật trên ISH hiện tại hoặc thời điểm gửi tài khoản Portal.
