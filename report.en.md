@@ -22,6 +22,76 @@ This is a **proposed target journey** for design and storytelling. Screens and r
 
 **Three key distinctions:** Applying does not secure a room. An estimated cost is not necessarily payable now. One student can have multiple reservations; money and documents need the correct stay context.
 
+### Design scope — what needs to be designed
+
+This is the proposed design scope, based on the audit already completed. It is not a new Figma review or confirmation of live features. Use the screen groups and connected flows below to plan design, prototype and demo coverage. A state may be a variant of a screen, not a separate page.
+
+**Priority:** **First** = required for the core journey. **Later** = follow-up scope; retain existing functions in the revamp. **Confirm** = agree the rule or whether the feature is needed before committing its design. First-priority work can begin with clearly labelled assumptions; unresolved business rules are listed below.
+
+#### 1. Screens by application, with required states
+
+**Application Form**
+
+| Screen group | States to cover | Priority |
+|---|---|---|
+| Before you apply: eligibility, documents, fee and process | Ready to start; guidance when not eligible | First |
+| Application steps and review | Empty; entered; validation error; back/edit; loading or interrupted | First |
+| Application fee and submission result | Processing; success; failure; fee paid but submission uncertain, with recovery | First |
+| Application tracking and next steps | Submitted; under review; information requested; accepted; waitlisted; declined; expired hold | First |
+| Save and resume | Saved; resumed; expired or unavailable draft | Confirm: current support and intended scope |
+
+**Student Management / Admin**
+
+| Screen group | States to cover | Priority |
+|---|---|---|
+| Application work queue and review | Empty; pending review; missing information; decision; waitlist; conversion result/error | First |
+| Reservation detail and related records | Pending approval; confirmed; cancelled; current/upcoming/past; missing linked information | First |
+| Availability and placement | Available; no availability; date/bed conflict; placement pending; confirmed; error | First |
+| Rates and price preview | Nightly/monthly or supported term basis; full/partial period; invalid dates; overlapping rules; unavailable quote | First; confirm calculation and supported bases |
+| Invoice list, detail and issue/review | Empty; draft; issued; partial; paid; overdue balance; void; issue error | First; confirm approval and visibility rules |
+| Payments and reconciliation | No payment; pending; succeeded; failed; unmatched or partial allocation; refund if supported | First; confirm refund policy |
+| Documents and request queue/detail | Missing/submitted/reviewed document; pending/approved/declined request; error | First: admissions documents and existing guest requests; other services later |
+
+**Student Portal**
+
+| Screen group | States to cover | Priority |
+|---|---|---|
+| Login, recovery and access | Login; invalid/expired link; recovery sent; no access | First |
+| Task home and application checklist | No tasks; application pending; action required; accepted; hold expiring/expired; loading/error | First |
+| Reservation list and detail | Empty; pending approval; confirmed; current/upcoming/past; cancelled | First |
+| Booking eligibility, term/type selection, quote/review and result | Eligible/ineligible; selected; no availability; price review; pending approval; confirmed when authorized; expired selection; error | First journey coverage; confirm whether ISH uses student selection or staff assignment |
+| Price schedule, invoice list/detail and payment review | No payable charges; estimates versus issued charges; due/overdue; partial; paid | First |
+| Checkout, payment result and receipt/history | Processing; action required; success; failed/cancelled; uncertain outcome with recovery | First |
+| Documents, Handbook/help and guest request/history | Empty; available/broken document; upload error where supported; guest request pending/approved/declined | First: preserve essential information and existing services |
+| Maintenance request/list/detail | Empty; submitted; in progress; resolved; error | Later; confirm existing ISH scope |
+| Renewal, room change and termination requests | Eligible/ineligible; submitted; pending; approved/declined; expired | Later; confirm policies; keep separate from first booking |
+| Profile/preferences | View/edit; validation error; saved; save failed | Later; retain existing essentials |
+| Scholarships, Community and maps | Empty; content/results; loading/error | Confirm need; not a dependency of the core demo |
+
+#### 2. Connected flows — which screens follow which?
+
+| Flow | Screen sequence and application handoff | Priority |
+|---|---|---|
+| Apply and get a decision | Form: Before apply → steps → review → fee/submission result → Admin: queue → application review → student: tracking/decision. Use Portal only once access exists. | First |
+| Complete acceptance requirements | Student: acceptance/hold checklist → documents/agreement → Admin: document review → student: updated checklist or request for more information. Entry point depends on access timing. | First |
+| Staff assigns housing | Admin: application → authorized conversion/reservation → availability/placement → price review → pending or confirmation → Portal: reservation detail and next task | First; confirm actual order/permissions |
+| Approved student selects housing | Portal: eligibility → term/type selection → quote/review → request/result → Admin: reservation review/placement if required → Portal: pending or confirmed reservation | Confirm ISH mode; use this branch when enabled, otherwise staff assignment |
+| Issue and pay an invoice | Admin: reservation/rates → draft invoice → review/issue → Portal: invoice list/detail → payment review → checkout → result/receipt → Admin: payment/reconciliation | First |
+| Recover from an interrupted payment | Form or Portal: uncertain/failed outcome → payment status/reference → safe recovery → updated application/invoice; Admin reconciliation when needed | First; no second charge implied by a retry |
+| Guest request and resident information | Portal: documents/help or guest request → submitted/history → Admin: request review → Portal: updated status/instructions | First |
+| Other resident services | Portal: maintenance/renewal/change/termination request → Admin: request detail/review → Portal: status/result | Later, after policy and scope confirmation |
+
+These are target flows, not tested production transitions. They show handoffs; they do not make each application, booking, document and payment share one status. In prototypes and videos, reuse one fictional student/stay and show who acts next. The core demo follows application → review → requirements → the agreed housing branch → invoice → payment/receipt. Show pending approval before confirmation when required.
+
+#### 3. Decisions that affect the scope
+
+- **Access:** when are Portal credentials sent, and where does the student complete requirements before access?
+- **Housing:** staff assignment or approved-student selection; room type versus exact room/bed; who approves; what Booked and Confirmed mean.
+- **Money:** supported rate bases, partial periods, deposits, approval/visibility, payment methods and refund rules.
+- **Services:** which document uploads, maintenance, renewal, change, termination, scholarships and community features ISH needs now.
+
+**Design coverage is complete when** every First row has its screens and important states, every First flow has a visible handoff/outcome, and the housing branch is agreed or explicitly marked as an assumption. Later/Confirm items are not promises for the first release. This scope defines what to design; it does not prescribe layouts or individual controls.
+
 ### October 24 clarification — separate two placement paths
 
 **Product-owner clarification:** staff reject applications or convert them into reservations. A separate use case allows approved students to choose housing in the Portal; this is not Request Room Change. Whether this is enabled on current ISH production, and when Portal credentials are sent, remain unconfirmed.
