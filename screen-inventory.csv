@@ -12,7 +12,7 @@ S01,Student,Login and account recovery,P1,1,Session already authenticated,1:1181
 S02,Student,Task-first home,P1,1,E04,1:1220;16:2844,applicant accepted current upcoming no tasks,Journey state mapping
 S03,Student,Reservation list and selector,P1,1,E04 E13,,current upcoming history empty,Date boundaries
 S04,Student,Reservation detail,P1,1,E07 E13,,pending confirmed cancelled changed bed,Reservation contract
-S05,Student,Reserve or request room preferences,P1,1,V01 F02,6:402 menu only,dates term quote waitlist pending,Selection mode
+S05,Student,Reserve or request room preferences,P1,1,V01 F02 F05 F06 S01 S02,6:402 menu only,eligibility term room-type selection quote pending approval confirmed unavailable expired,Confirm ISH mode exact inventory level and approval gate
 S06,Student,Rate breakdown and payment schedule,P1,1,E08 E10,1:1220 monthly only,monthly semester fixed-term prorated,Rate mapping
 S07,Student,Documents and contract access,P1,1,E01 E11,1:3980;16:2750,available missing expired permission denied,Document integration
 T01,Student,Invoice list,P1,1,E05,,unpaid partial paid overdue empty,Issued visibility
@@ -22,7 +22,7 @@ T04,Student,Payment processing and extra action,P0,1,Unverified,,pending action 
 T05,Student,Payment success and receipt,P1,1,E06 history only,1:2806 receipt entry,success settled receipt unavailable,Payment allocation
 T06,Student,Payment failure retry and history,P0,1,E06,1:2806;16:2277,failed retry pending partial refunded,Idempotency and reconciliation
 D01,Admin,Work queue and application list,P1,1,E16,,pending incomplete expiring waitlisted,Role and saved view design
-D02,Admin,Application review workspace,P1,1,E01 E16,,review acceptance waitlist document issues,Admissions transition mapping
+D02,Admin,Application review workspace,P1,1,E01 E16 S01 S02,,review reject waitlist request information authorized convert duplicate prevention,Conversion conditions and Portal access timing
 D03,Admin,Reservation record workspace,P1,1,E07,,pending confirmed deposit context timeline,Existing object mapping
 D04,Admin,Availability and placement preview,P1,1,E15,,available conflict no inventory multi-segment,Inventory rules
 D05,Admin,Rate plan configuration,P1,1,E10 V01,,monthly semester fixed-term nightly,Rate basis mapping
