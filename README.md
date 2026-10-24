@@ -1,6 +1,6 @@
 # ISH Student Housing UX Audit
 
-Bilingual Vietnamese / English report, organized by the connected student journey and three applications.
+English reader, with maintained Vietnamese and English sources, organized by the connected student journey and three applications.
 
 Live report: https://thanhldt6295.github.io/ish-student-housing-audit/
 
@@ -8,10 +8,10 @@ Live report: https://thanhldt6295.github.io/ish-student-housing-audit/
 
 1. Edit `report.vi.md` and `report.en.md` together; preserve the seven main sections and 13 reference sections in matching order.
 2. Run `python build.py` (Python 3, standard library only).
-3. Check links, language switching, and the absence of production/private data.
+3. Check section links, legacy deep links, and the absence of production/private data.
 4. Commit sources and the generated `index.html` to `main`. GitHub Pages publishes the root directory.
 
-The language switch preserves the current main section, remembers language preference, and mirrors expanded reference sections. Deep links support `#vi-section-1` and `#en-section-1`.
+The reader displays English only, including when JavaScript is disabled. Vietnamese remains available as a maintained source. Existing `#vi-section-1` and `#section-1` deep links redirect to `#en-section-1`. Supporting detail stays collapsed until opened.
 
 ## Content boundaries
 
