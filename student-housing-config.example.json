@@ -1,0 +1,122 @@
+{
+  "$comment": "Design blueprint only. Not a Salesforce deployment file. Null policies require SME confirmation; no production changes were made.",
+  "schemaVersion": "0.1-draft",
+  "status": "proposal-not-deployable",
+  "auditDate": "2026-10-23",
+  "tenant": {
+    "id": "ish",
+    "displayName": "International Student House of Washington, DC",
+    "locale": "en-US",
+    "currency": "USD",
+    "propertyTimezone": "America/New_York",
+    "requiresConfirmation": ["locale", "propertyTimezone"]
+  },
+  "branding": {
+    "logoAsset": null,
+    "theme": "ish-proposed",
+    "portalDirection": "O:live-inspired; source library not yet verified",
+    "adminDirection": "SLDS patterns; target version to confirm",
+    "tokens": {
+      "color": {
+        "action.primary": "#00527D",
+        "text.primary": "#182B3A",
+        "text.secondary": "#526474",
+        "surface.canvas": "#F4F6F8",
+        "surface.card": "#FFFFFF",
+        "border.default": "#C8D0D9",
+        "focus.ring": "#0067C0",
+        "status.info": "#005A91",
+        "status.success": "#216E39",
+        "status.warning": "#805500",
+        "status.danger": "#B42318"
+      },
+      "spacingPx": [4, 8, 12, 16, 24, 32, 48],
+      "radiusPx": {"input": 6, "card": 12, "pill": 999},
+      "typography": {"fontFamily": "Inter, Arial, sans-serif", "bodyPx": 16, "tablePx": 14},
+      "interaction": {"preferredTouchTargetPx": 44, "visibleKeyboardFocus": true}
+    },
+    "tokenProvenance": "Proposed starting values, not extracted brand standards; validate contrast in each component state."
+  },
+  "modules": {
+    "application": {"observed": true, "targetEnabled": true, "evidence": ["E01", "E02", "E03", "E16"]},
+    "reservations": {"observed": true, "targetEnabled": true, "evidence": ["E04", "E07", "E13"]},
+    "invoicesPayments": {"observed": true, "targetEnabled": true, "evidence": ["E05", "E06", "E08"]},
+    "overnightGuests": {"observed": true, "targetEnabled": true, "evidence": ["E12"]},
+    "houseInformation": {"observed": true, "targetEnabled": true, "evidence": ["E11", "E17"]},
+    "maintenance": {"observedInInspectedProduction": false, "figmaPresent": true, "targetEnabled": null},
+    "scholarships": {"observedInInspectedProduction": false, "figmaPresent": true, "targetEnabled": null},
+    "roomChangeRenewalTermination": {"observedInInspectedProduction": false, "figmaPresent": true, "targetEnabled": null}
+  },
+  "admissions": {
+    "applicationFee": {"amount": 50, "currency": "USD", "refundable": false, "evidence": ["E01", "E03"], "validateBeforeLaunch": true},
+    "publishedProcessingMaxBusinessDays": 2,
+    "publishedAcceptanceChecklistWindowDays": 5,
+    "checklistWindowDayType": null,
+    "waitlistSupportedByPublishedCopy": true,
+    "reservationCreationTrigger": null,
+    "saveResumeImplementation": null,
+    "checklist": ["residentAgreement", "identityDocument", "universityOrInternshipAcceptance", "recentPhoto", "emergencyContact"],
+    "requiresConfirmation": ["checklistWindowDayType", "reservationCreationTrigger", "saveResumeImplementation", "requiredFields", "holdExpiryBehavior"]
+  },
+  "housing": {
+    "inventoryHierarchy": ["property", "roomType", "room", "bed"],
+    "observedAvailabilityFilters": ["property", "roomType", "bedType", "floor", "gender", "onlyAvailable"],
+    "studentSelectionMode": null,
+    "allowedSelectionModes": ["preferenceOnly", "roomType", "room", "bed", "adminAssigned"],
+    "academicPeriods": [],
+    "academicPeriodImplementationVerified": false,
+    "requiresConfirmation": ["studentSelectionMode", "academicPeriods", "placementApproval", "conflictRules"]
+  },
+  "rates": {
+    "observedProductionLabels": ["Nightly Rate", "X Nights Rate", "Monthly Rate"],
+    "videoDescribedBases": ["semester", "monthly", "fixedTerm"],
+    "canonicalTargetBases": ["nightly", "monthly", "semester", "fixedTerm"],
+    "mapping": {"Nightly Rate": "nightly", "Monthly Rate": "monthly", "X Nights Rate": null},
+    "prorationRule": null,
+    "effectiveDateOverlapRule": null,
+    "taxAndInclusions": null,
+    "versionedRateSnapshot": true,
+    "previewBeforePublish": true,
+    "requiresConfirmation": ["prorationRule", "effectiveDateOverlapRule", "taxAndInclusions", "semesterMapping", "fixedTermMapping", "invoiceLineUnits"]
+  },
+  "finance": {
+    "deposit": {"requiredAmount": null, "scope": null, "carryForwardRule": null, "refundRule": null},
+    "draftInvoiceStudentVisibility": null,
+    "plannedScheduleStudentVisibility": null,
+    "invoiceApprovalRoles": [],
+    "partialPaymentsAllowed": null,
+    "paymentProviderObserved": "Stripe",
+    "savedBankMethodSupported": null,
+    "savedCardMethodSupported": null,
+    "targetStateSeparation": {
+      "invoiceLifecycle": ["draft", "issued", "void"],
+      "settlement": ["unpaid", "partial", "paid"],
+      "paymentAttempt": ["initiated", "processing", "actionRequired", "succeeded", "failed", "refunded"],
+      "overdue": "derived from issued invoice, positive balance, and due date"
+    },
+    "releaseGateEvidence": ["E04", "E06", "E08", "E09"],
+    "requiresConfirmation": ["deposit", "draftInvoiceStudentVisibility", "plannedScheduleStudentVisibility", "invoiceApprovalRoles", "partialPaymentsAllowed", "savedPaymentMethods", "refundWorkflow"]
+  },
+  "content": {
+    "handbook": {"url": null, "owner": null, "version": null, "observedLinkBroken": true, "evidence": ["E11"]},
+    "supportContact": null,
+    "noticeExpiryRequired": true,
+    "requiresConfirmation": ["handbook", "supportContact", "guestHealthQuestions", "terminationNoticeDays"]
+  },
+  "authorization": {
+    "targetRoles": ["applicant", "resident", "admissions", "housingOperations", "financeReviewer", "financeApprover", "tenantAdmin"],
+    "productionRoleMappingVerified": false,
+    "residentRecordScope": "ownRecordsOnly",
+    "sensitiveDocumentAccess": "explicitPurposeAndRole",
+    "requiresConfirmation": ["roleMapping", "approvalSeparation", "documentRetention"]
+  },
+  "demo": {
+    "environment": "sandbox-only",
+    "studentName": "Alex Morgan",
+    "tenantDisplayName": "Demo House",
+    "academicPeriod": "Fall Demo 2027",
+    "productionScreensAllowedInMarketing": false,
+    "prototypeLabelRequiredWhenUnimplemented": true,
+    "fixtureAmounts": "Create one reconciled dataset after Finance validates rate rules."
+  }
+}
