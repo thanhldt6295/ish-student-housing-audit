@@ -2,7 +2,7 @@
 
 **Đọc hành trình trước, xem từng ứng dụng sau.** Mục tiêu là giúp sinh viên biết việc cần làm và giúp nhân viên xử lý hồ sơ, phòng ở, tiền thu trong cùng một hành trình.
 
-Ngày kiểm tra: **23/10/2026 · Chỉ đọc production**. Bản chia sẻ công khai đã bỏ ảnh production và chi tiết định danh/giao dịch. Bản này tổ chức lại kết quả audit đã có; không có kiểm tra production mới. Phần chính tập trung vào các việc quan trọng nhất. Bằng chứng và phân tích sâu được thu gọn ở cuối.
+Ngày kiểm tra production: **23/10/2026 · Chỉ đọc**. Bổ sung 24/10: đọc tin nhắn từ 23:00 ngày 23/10 đến 14:21 ngày 24/10, ảnh và Figma cũ; không có thao tác nghiệp vụ production mới. Bản chia sẻ công khai đã bỏ ảnh production và chi tiết định danh/giao dịch. Bản này tổ chức lại kết quả audit đã có; không có kiểm tra production mới. Phần chính tập trung vào các việc quan trọng nhất. Bằng chứng và phân tích sâu được thu gọn ở cuối.
 
 ## 0. Hành trình tổng thể — chuyện gì đang diễn ra?
 
@@ -36,7 +36,7 @@ Dùng **Alex Morgan — Demo House — Fall Demo 2027** trong thiết kế và v
 
 ### Cách đọc bằng chứng
 
-**Đã xác minh:** nhìn thấy trực tiếp trong production/Figma. **Cần xác nhận:** chưa kiểm tra được hành vi hoặc quy tắc. **Đề xuất:** trải nghiệm nên thiết kế. Mã E là bằng chứng production, F là Figma, V là mô tả video; tra ở cuối tài liệu.
+**Đã xác minh:** nhìn thấy trực tiếp trong production/Figma. **Cần xác nhận:** chưa kiểm tra được hành vi hoặc quy tắc. **Đề xuất:** trải nghiệm nên thiết kế. Mã E là bằng chứng production, F là Figma, S là trao đổi/ảnh tham chiếu từ người phụ trách, V là mô tả video; tra ở cuối tài liệu.
 
 ## 1. Application Form — sinh viên bắt đầu đăng ký
 
@@ -76,18 +76,22 @@ Các màn chính: Before you apply; form; Review & fee; kết quả thành công
 
 Có Resident Applications, Reservations, Availability, Rate Controller và BN Invoices. Reservation có room/bed, ngày ở, tổng tiền, deposit và hóa đơn liên quan. Có invoice Draft/Partial/Paid; rate manager có Nightly/X Nights/Monthly. Chưa thử duyệt, gán phòng, đổi giá hay phát hành hóa đơn. [E07–E10, E14–E16]
 
+### Bằng chứng bổ sung: view All đã có các cột cần thiết
+
+Ảnh người phụ trách gửi cho thấy Resident Applications ở view **All** đã có mã đơn, Created Date, Contact, Start Date, End Date và Status, gồm **Booked / Turned Down**. Nhận xét chỉ thấy mã trước đây áp dụng cho Recently Viewed, không phải mọi view. Cần cải thiện tính nhất quán giữa view và danh sách việc cần xử lý; không coi các cột hiện có là chưa tồn tại. Ảnh chưa chứng minh thao tác chuyển đổi hoặc Booked đồng nghĩa phòng đã Confirmed. [S02]
+
 ### Những việc cần sửa trước
 
 | Cần làm | Vì sao? | Kết quả mong muốn |
 |---|---|---|
-| Danh sách hồ sơ chờ xử lý, thiếu giấy tờ, sắp hết hạn | View application đã xem chỉ có mã | Biết cần xử lý ai và việc gì trước |
+| Danh sách hồ sơ chờ xử lý, thiếu giấy tờ, sắp hết hạn | Recently Viewed ít thông tin; view All đã có Contact/ngày/trạng thái | Biết cần xử lý ai và việc gì trước |
 | Từ hồ sơ xem được reservation, phòng, giá, hóa đơn và payment | Tránh tìm lại và nhầm giữa nhiều lần ở | Mở phần liên quan mà vẫn giữ đúng ngữ cảnh |
 | Xếp phòng có ngày ở, tình trạng còn chỗ và giá đi kèm | Tránh xác nhận khi thiếu thông tin | Xem kết quả và xung đột trước khi xác nhận |
 | Rõ quy trình kiểm tra → phát hành hóa đơn → đối soát | Sinh viên nhận đúng khoản phải trả | Trạng thái, số tiền và lịch sử khớp giữa hai phía |
 
 ### Luồng và màn hình nên thiết kế
 
-Nhận hồ sơ → kiểm tra → chấp thuận/chờ chỗ/yêu cầu bổ sung → kiểm tra điều kiện giữ chỗ → xác nhận phòng → kiểm tra giá/lịch thu → phát hành hóa đơn → theo dõi thanh toán. Thứ tự cụ thể giữa hồ sơ, hold và placement cần ISH xác nhận.
+Nhận hồ sơ → kiểm tra → từ chối/chờ chỗ/bổ sung hoặc chuyển reservation theo quyền → kiểm tra điều kiện → admin xếp hoặc sinh viên chọn → chờ duyệt/xác nhận → kiểm tra giá/lịch thu → phát hành hóa đơn → theo dõi thanh toán. Thứ tự cụ thể giữa hồ sơ, hold và placement cần ISH xác nhận.
 
 Các màn chính: Work queue; Application review; Reservation detail; Availability/placement; Rates và xem trước giá; Invoice list/detail/review; Payments/đối soát. Chi tiết inventory: D01–D09.
 
@@ -104,6 +108,20 @@ Các màn chính: Work queue; Application review; Reservation detail; Availabili
 ### Hiện tại
 
 Có Dashboard, hai reservation trong tài khoản mẫu, lịch sử invoice/payment, yêu cầu khách qua đêm và thông tin cư dân. Figma đã có Payments, thêm phương thức thanh toán và mobile. Chưa thấy luồng đầy đủ cho reserve, invoice đến hạn và kết quả checkout trong inventory Figma đã xem. [E04–E06, E12–E13, F01–F04]
+
+### Đặt phòng sau duyệt — phần thiết kế cần bổ sung
+
+Tham chiếu cũ cho chọn **loại phòng theo kỳ**, chưa chứng minh chọn phòng/bed cụ thể. Ảnh danh sách reservation liên quan có **Pending Approval**; chưa thực hiện chuyển trạng thái giữa các ảnh tĩnh này. [F05, F06, S01]
+
+| Bước cần có | Cần thể hiện rõ |
+|---|---|
+| Quyền đặt và truy cập | Hồ sơ đã duyệt chưa, được đặt chưa, còn thiếu gì; tài khoản Portal khác quyền đặt phòng |
+| Kỳ và loại phòng | Ngày kỳ ở, khả dụng, số người, phòng tắm/tiện nghi; trạng thái được chọn/hết chỗ |
+| Giá và xem lại | Cơ sở tính giá, khoảng ngày, tổng phí, đặt cọc, khoản trả ngay và điều kiện hủy |
+| Gửi và kết quả | Không gửi trùng; Pending Approval nếu phù hợp, người xử lý tiếp và phân biệt Confirmed |
+| Hết chỗ hoặc gián đoạn | Không có kết quả, hết chỗ lúc chọn, quyền đặt hết hạn và cách quay lại/thử lại |
+
+**Tách ba hành động:** đặt lần đầu, gia hạn, Request Room Change. Xác nhận chế độ thực tế trên ISH; không hứa bed cụ thể hay xác nhận ngay chỉ từ các ảnh tham chiếu.
 
 ### Những việc cần sửa trước
 
@@ -226,6 +244,9 @@ Kiểm tra deliverable: JSON đọc hợp lệ; CSV có 40 ID duy nhất; HTML k
 | F03 | Figma Payments `1:2806`, Add Method `1:3694` | Overview, payment methods (bank/card), paid history, Receipt; Add Method form; chưa thấy invoice due/detail và checkout success/failure trong screen inventory; top-level reactions của mẫu này rỗng, chưa audit tất cả nested interactions |
 | F04 | Figma Mobile Version, styles/variables API | 9 mobile frames, gồm Dashboard 393 × 2724, Payments 393 × 1415; local variable collections và local text styles trả về rỗng. Có instance Button/Icon Button, nên không suy ra không dùng component hoặc không có thư viện ngoài |
 | F05 | Figma Student Portal cũ · OLD · node 2:47 | Ảnh New Reservation: Booking Term, thẻ loại phòng, ảnh/giá/tiện nghi, Select và Proceed; page NEW Design trống. Chỉ là tham chiếu lịch sử, chưa xác minh đang bật trên ISH. |
+| F06 | Figma cũ · OLD · node 2:53 | Danh sách reservation tham chiếu có loại phòng và Pending Approval; ảnh tĩnh, chưa kiểm tra chuyển trạng thái. |
+| S01 | Trao đổi với người phụ trách | Admin từ chối hoặc chuyển application; có use case chọn phòng sau duyệt khác đổi phòng. Chưa rõ mốc gửi tài khoản và đang bật trên ISH hay không. |
+| S02 | Ảnh người phụ trách cung cấp | View All có mã/Created Date/Contact/ngày ở/Status Booked hoặc Turned Down; ảnh khác có chọn loại phòng theo kỳ. Không công khai tên hay ảnh gốc. |
 | V01 | [Video tham chiếu](https://www.youtube.com/watch?v=cbDme_9XLDs) | 7:16; mô tả kết nối reservations/rates/invoices/payments, placements, academic periods; nói semester/monthly/fixed-term, student reserve và approved transactions; đây là lời mô tả, chưa xác minh chức năng tương ứng trên ISH |
 
 Bản chia sẻ công khai không chứa ảnh production, mã hồ sơ hay chi tiết giao dịch. Bằng chứng gốc được giữ trong bản nội bộ.
@@ -276,7 +297,7 @@ P0: rủi ro chặn phát hành vì dữ liệu/tiền hoặc mất chức năng
 | UX10 · P1 | F01: không thấy admin/application screens trong file | Dễ phát hành portal đẹp nhưng workflow admin không đổi | Admin workspace cho application/reservation review, placement, rates, invoice review, payment reconciliation; liên kết record giữ context |
 | UX11 · P1 | E11: Handbook mở trang không tìm thấy | Tài liệu thiết yếu không truy cập được | Cấu hình nguồn tài liệu có version/owner; kiểm tra link; fallback contact; sửa bằng quy trình thay đổi riêng sau audit |
 | UX12 · P2 | E14: footer “25 of 0”; Paid vẫn có Days Due âm | Giảm tin cậy, dễ đọc Paid là quá hạn | Count theo query thật; empty/loading/error riêng; due label phụ thuộc balance/status; “Paid” không mang cảnh báo nợ |
-| UX13 · P1 | E16: Recently Viewed chỉ có mã application | Phải mở từng bản ghi mới biết ai, lúc nào, trạng thái gì | Saved views theo công việc; applicant, requested dates, status, received date, hold deadline, missing items, owner; không sửa production view trong audit |
+| UX13 · P1 | E16/S02: Recently Viewed chỉ có mã; All đã có người, ngày và trạng thái | Các view cần nhất quán theo công việc | Giữ cột đã có trong All; bổ sung hàng đợi thiếu giấy tờ, hạn giữ chỗ và người phụ trách sau xác nhận |
 | UX14 · P2 | F02/F04: Dashboard desktop 1995 px, mobile 2724 px; news/map lớn | Chiếm chỗ của việc cần làm và thông tin lưu trú | Task queue đầu trang; amount due/hold/checklist/current stay; news/map sang Community/Help hoặc thu gọn; emergency/help vẫn dễ tìm |
 | UX15 · P1 | F02: Start Nov 2026, End Apr 2026; stale notice; typo; tên/email/brand mẫu không nhất quán | Thiết kế giảm tin cậy và demo khó hiểu | Một fixture dataset duy nhất; end > start; số tiền thống nhất mọi màn; thông báo có thời hạn; sửa copy; initials theo tên |
 | UX16 · P1 | F04: local variable collections/text styles rỗng | Khó đổi brand và giữ consistency | Semantic tokens, typography, components và state contracts; kiểm tra library ngoài trước xây lại; hai tenant demo bằng cùng component |
@@ -503,7 +524,7 @@ Không cần chờ tất cả câu trả lời để sửa copy fixture, thiết
 | 0–7s | Một request có preferred dates/type | “Preference chưa phải là phòng đã xác nhận.” | Data fixture thống nhất |
 | 7–24s | Admin workspace → availability có filters | “Đối chiếu ngày ở và chỗ còn trống ngay trong cùng ngữ cảnh.” | Availability sandbox có dữ liệu |
 | 24–40s | Chọn placement → preview rate/conflict | “Xem tác động trước khi xác nhận.” | Conflict/rate preview đã implement hoặc nhãn prototype |
-| 40–53s | Confirm trong sandbox, portal Upcoming | “Sinh viên thấy lịch và trạng thái của reservation.” | Transition chứng minh được |
+| 40–53s | Pending Approval → duyệt/xác nhận trong sandbox → portal Upcoming | “Sinh viên thấy lịch và trạng thái của reservation.” | Kiểm chứng từng chuyển trạng thái; không bỏ qua bước duyệt |
 | 53–60s | ID liên kết về record, CTA | “Theo dõi placement xuyên suốt vòng đời lưu trú.” | Không khẳng định thuật toán tự xếp phòng |
 
 #### Tập 3 — “Monthly, semester hay fixed-term?” · 70 giây
