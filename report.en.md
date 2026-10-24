@@ -2,7 +2,7 @@
 
 **Start with the journey, then explore each application.** Help students understand their next steps and help staff manage applications, housing, and charges as one connected journey.
 
-Public edition: production screenshots and identifying transaction details are omitted. Review date: **October 23, 2026 · Read-only production review**. This edition reorganizes the existing findings, without new production testing. The main sections focus on essential work; supporting detail is collapsed below.
+Public edition: production screenshots and identifying transaction details are omitted. Review date: **October 23, 2026 · Read-only production review**. Follow-up review: October 24, 2026, covering stakeholder messages from October 23 at 23:00 through October 24 at 14:21 (Vietnam time), their screenshots, and legacy Figma references. No new production transactions or record changes were performed. The main sections focus on essential work; supporting detail is collapsed below.
 
 ## 0. The full journey — what happens next?
 
@@ -36,7 +36,7 @@ Use **Alex Morgan — Demo House — Fall Demo 2027** in design and video. This 
 
 ### Reading the evidence
 
-**Verified:** directly observed in production/Figma. **To confirm:** behavior/rules not yet tested. **Proposed:** target design. E references production, F references Figma, V references the video description; see references below.
+**Verified:** directly observed in production/Figma. **To confirm:** behavior/rules not yet tested. **Proposed:** target design. E references production, F references Figma, S references stakeholder clarification/screenshots, V references the video description; see references below.
 
 ## 1. Application Form — starting an application
 
@@ -76,18 +76,22 @@ Core screens: Before you apply; form; Review & fee; success/processing/failure; 
 
 Resident Applications, Reservations, Availability, Rate Controller and BN Invoices exist. Reservations show room/bed, dates, totals, deposit and related invoices. Invoice states include Draft/Partial/Paid; rate tabs include Nightly/X Nights/Monthly. Approval, assignment, rate changes and issuance were not executed. [E07–E10, E14–E16]
 
+### Follow-up evidence: the All view already has useful columns
+
+A stakeholder screenshot shows Resident Applications in the **All** view with application reference, Created Date, Contact, Start Date, End Date and Status. Visible states include **Booked** and **Turned Down**. The earlier IDs-only observation applies to Recently Viewed, not every application view. Improve saved-view consistency and action queues; do not rebuild columns that already exist. The screenshot does not demonstrate conversion actions or prove that Booked means a confirmed room. [S02]
+
 ### What to improve first
 
 | Required improvement | Why? | Desired result |
 |---|---|---|
-| Queue for pending applications, missing documents and expiring holds | The inspected application view showed IDs only | Know who needs action and what to do next |
+| Queue for pending applications, missing documents and expiring holds | Recently Viewed was sparse; All already includes applicant, dates and status | Know who needs action and what to do next |
 | Related reservation/room/rate/invoice/payment in one context | Avoid repeated searching and mixing stays | Navigate without losing the record context |
 | Dates, availability and pricing during placement | Avoid confirmation with incomplete information | Preview outcome/conflicts before confirmation |
 | Clear review → issue → reconcile | Students receive the correct payment task | Matching amounts, statuses and history |
 
 ### Proposed flow and screens
 
-Receive → review → accept/waitlist/request information → check hold requirements → confirm placement → review price/schedule → issue invoice → monitor payment. ISH must confirm the exact order between application, hold and placement.
+Receive → review → reject/waitlist/request information or authorized conversion → check hold requirements → staff assignment or eligible student selection → pending/confirmed result → review price/schedule → issue invoice → monitor payment. ISH must confirm the exact order between application, hold and placement.
 
 Core screens: Work queue; Application review; Reservation detail; Availability/placement; Rates/preview; Invoice list/detail/review; Payments/reconciliation. Inventory: D01–D09.
 
@@ -104,6 +108,20 @@ Core screens: Work queue; Application review; Reservation detail; Availability/p
 ### Current experience
 
 Dashboard, multiple stays, invoice/payment history, overnight guests and resident information exist. Figma already contains Payments, Add Payment Method and mobile screens. Complete reservation, payable-invoice and checkout-result flows were not found in the inspected inventory. [E04–E06, E12–E13, F01–F04]
+
+### Approved-student booking — essential design work
+
+The older reference lets students choose a **room type for a booking term**. It does not prove exact room/bed selection. A related reservation-list reference shows **Pending Approval**; the transition between these static images was not executed. [F05, F06, S01]
+
+| Required step | What must be clear? |
+|---|---|
+| Eligibility and access | Is the application approved, can this student book, and what remains required? Keep Portal access separate from booking permission. |
+| Term and room-type selection | Term dates, room-type availability, occupancy, bathroom and included amenities; clear selected/unavailable states. |
+| Quote and review | Price basis, covered period, total, deposit, amount payable now and applicable cancellation terms. |
+| Submit and outcome | Avoid duplicate requests; say Pending Approval where applicable, explain who acts next, and distinguish it from Confirmed. |
+| Unavailable or interrupted | No results, sold out during selection, expired eligibility and a safe return/retry path. |
+
+**Keep three actions separate:** first booking, renewal, and Request Room Change. Confirm which selection mode ISH currently permits. Do not promise a specific bed or immediate confirmation from these references alone.
 
 ### What to improve first
 
@@ -206,13 +224,16 @@ No YouTube transcript was available. Description and chapters were reviewed; no 
 | E13 | Multiple confirmed stays; no new-booking CTA in sampled account/state |
 | E14 | Invoice search shows Draft/Partial/Paid; visible rows contradict displayed record count; a paid row retains negative Days Due |
 | E15 | Availability filters/calendar/legend; no assignment or reservation creation attempted |
-| E16 | Recently Viewed application view shows IDs only; neither total application count nor waitlist status inferred |
+| E16 | Earlier live Recently Viewed showed IDs only. The supplied All-view screenshot has Created Date, Contact, stay dates and Booked/Turned Down. These are distinct views; conversion behavior remains untested |
 | E17 | Long resident-information page with rules/community/safety/guests/support; other external links not individually checked |
 | F01 | Student Portal plus empty Cover; 29 top-level frames in seven sections; no application/Admin page found |
 | F02 | Dashboard/news/map hierarchy; hamburger navigation; inconsistent sample dates/copy; reservation entry without a matching complete flow in inventory |
 | F03 | Payments/Add Method, methods/paid history/Receipt; complete due-invoice and checkout outcomes not found; nested reactions not fully audited |
 | F04 | Nine 393px mobile frames; local variables/text styles empty, but instances exist and external libraries were not ruled out |
 | F05 | Older Student Portal, OLD page, New Reservation image (node 2:47): Booking Term, room-type cards/pictures/pricing/amenities, Select and Proceed; NEW Design empty. Historical reference, not verified current ISH functionality. |
+| F06 | Legacy reservation-list reference (node 2:53) shows a selected room type and Pending Approval. Static screenshot; transition not tested. |
+| S01 | Stakeholder clarification: staff reject or convert applications; approved-student selection is a separate use case, not room change. Access timing uncertain; ISH activation unverified. |
+| S02 | Stakeholder screenshots: Admin All view includes application/contact/date/status columns; separate image corroborates term-based room-type selection. No identities or screenshots published. |
 | V01 | Video describes placements, rates, finance, academic periods, student booking and approved transactions; full ISH parity not established |
 
 Record-level evidence remains in the internal Vietnamese report. Public sharing omits production images, resident/record identifiers, internal record URLs and transaction details.
@@ -261,7 +282,7 @@ P0: financial/data-integrity or preservation release gate. P1: core task. P2: ef
 | UX10 · P1 · Admin/application gap | F01 | Review, placement, rates, invoice and reconciliation workspaces |
 | UX11 · P1 · Broken Handbook | E11 | Version/owner, link health, fallback support |
 | UX12 · P2 · Count/due language | E14 | Correct query count, loading/empty/error; no debt alert on paid rows |
-| UX13 · P1 · Application list context | E16 | Applicant/dates/status/received/deadline/missing items/owner |
+| UX13 · P1 · Saved views and actionable queues | E16/S02 | Preserve existing All-view columns; align Recently Viewed and task views; verify missing-items/deadline/owner coverage |
 | UX14 · P2 · Dashboard hierarchy | F02/F04 | Tasks, due, checklist and stay first; news/map secondary |
 | UX15 · P1 · Fixtures/copy | F02 | One dataset, valid dates, consistent money/names, expiring notices |
 | UX16 · P1 · Reuse foundations | F04 | Audit external library, then tokens/type/components/state contracts |
@@ -421,7 +442,7 @@ No analytics baseline in this audit. Measure completion/drop-off, review time, o
 
 | Question | Suggested owner | Dependency |
 |---|---|---|
-| Reservation creation; real acceptance/hold/secured states? | Admissions + Salesforce | Journey/migration |
+| Conversion conditions, real acceptance/hold/secured states, and Portal invitation timing? | Admissions + Salesforce | Journey/migration |
 | Student room/bed choice or preference; renewal entry? | Housing Operations | Booking/permissions |
 | Deposit ownership/carry-forward/transfer? | Finance | Deposit/allocations |
 | Line date/quantity/rate-unit meaning? | Finance + Engineering | Financial release gate |
@@ -458,7 +479,7 @@ Use Alex Morgan/Demo House/Fall Demo 2027. Each episode: problem → action → 
 | 0–7s | Dates/type preference | A preference is not confirmed housing. | Consistent fixture |
 | 7–24s | Workspace → availability | Check dates and space in context. | Sandbox inventory |
 | 24–40s | Placement/rate/conflict preview | Review impact before confirming. | Working preview or prototype label |
-| 40–53s | Confirm → upcoming stay | Students see dates and status. | Actual sandbox transition |
+| 40–53s | Pending review or confirmation → upcoming stay | Students see dates and status. | Verified state transitions; do not skip approval |
 | 53–60s | Related record, CTA | Trace placement through the stay. | No automatic-allocation claim |
 
 ### Episode 3 — Monthly, semester or fixed-term? · 70 seconds
